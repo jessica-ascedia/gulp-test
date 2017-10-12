@@ -25,6 +25,12 @@ gulp.task('browser-sync', ['process'], function() {
     });
 	
 	gulp.watch("sass/*.scss", ['process']);
+	gulp.watch("index.html", ['watch-html']);
+});
+
+gulp.task('watch-html', ['process'], function (done) {
+    browserSync.reload();
+    done();
 });
 
 gulp.task('default', ['browser-sync']);
