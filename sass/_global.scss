@@ -1,0 +1,12 @@
+body {
+	font-family: 'Arial', 'sans-serif';
+	max-width: 1024px;
+	margin: auto;
+}
+
+p {
+	transition: all .1s linear;
+	padding: 20px;
+	border: 1px solid red;
+	border-radius: 10px;
+}
