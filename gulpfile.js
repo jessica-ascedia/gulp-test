@@ -6,7 +6,8 @@ var cssnano = require('cssnano');
 var browserSync = require('browser-sync').create();
 var uglify = require('gulp-uglify');
 var imagemin = require('imagemin');
-var imageminJpegtran = require('imagemin-jpegtran');
+var imageminJpegRecompress = require('imagemin-jpeg-recompress');
+var imageminSvgo = require('imagemin-svgo');
 
 gulp.task('process', function() {
 	var plugins = [
@@ -28,8 +29,12 @@ gulp.task('minify-js', function() {
 });
 
 gulp.task('imagemin', function () {
-	imagemin(['img/*.{jpg,png}'], 'img/min', {		plugins: [
-			imageminJpegtran()
+	imagemin(['img/*.{jpg,svg}'], 'img/min', {		plugins: [
+			imageminJpegRecompress({
+				quality: "low",
+				max: 50
+			}),
+			imageminSvgo()
 		]
 	})
 });
