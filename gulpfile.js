@@ -8,6 +8,7 @@ var uglify = require('gulp-uglify');
 var imagemin = require('imagemin');
 var imageminJpegRecompress = require('imagemin-jpeg-recompress');
 var imageminSvgo = require('imagemin-svgo');
+var imageminOptipng = require('imagemin-optipng');
 
 gulp.task('process', function() {
 	var plugins = [
@@ -29,12 +30,13 @@ gulp.task('minify-js', function() {
 });
 
 gulp.task('imagemin', function () {
-	imagemin(['img/*.{jpg,svg}'], 'img/min', {		plugins: [
+	imagemin(['img/*.{jpg,svg,png}'], 'img/min', {		plugins: [
 			imageminJpegRecompress({
 				quality: "low",
 				max: 50
 			}),
-			imageminSvgo()
+			imageminSvgo(),
+			imageminOptipng()
 		]
 	})
 });
@@ -49,7 +51,7 @@ gulp.task('browser-sync', ['process'], function() {
 	gulp.watch("sass/*.scss", ['process']);
 	gulp.watch("index.html", ['watch-html']);
 	gulp.watch("js/*.js", ['minify-js']);
-	gulp.watch("img/*.jpg", ['imagemin']);
+	gulp.watch("img/*.{jpg,svg,png}", ['imagemin']);
 });
 
 gulp.task('watch-html', ['process'], function (done) {
