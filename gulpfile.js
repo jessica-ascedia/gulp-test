@@ -10,6 +10,7 @@ var imageminJpegRecompress = require('imagemin-jpeg-recompress');
 var imageminSvgo = require('imagemin-svgo');
 var imageminOptipng = require('imagemin-optipng');
 var imageminGifsicle = require('imagemin-gifsicle');
+var spritesmith = require('gulp.spritesmith');
 
 gulp.task('process', function() {
 	var plugins = [
@@ -54,11 +55,22 @@ gulp.task('browser-sync', ['process'], function() {
 	gulp.watch("index.html", ['watch-html']);
 	gulp.watch("js/*.js", ['minify-js']);
 	gulp.watch("img/*.{jpg,svg,png,gif}", ['imagemin']);
+	gulp.watch("sprites/*.png", ['sprites']);
 });
 
 gulp.task('watch-html', ['process'], function (done) {
     browserSync.reload();
     done();
+});
+
+gulp.task('sprites', function () {
+    var spriteData = gulp.src('sprites/*.png')
+        .pipe(spritesmith({
+            imgName: 'sprite.png',
+            cssName: '_sprites.scss'
+        }));
+    spriteData.img.pipe(gulp.dest('img'));
+    spriteData.css.pipe(gulp.dest('sass'));
 });
 
 gulp.task('default', ['browser-sync']);
