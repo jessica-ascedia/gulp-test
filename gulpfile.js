@@ -18,7 +18,7 @@ gulp.task('process', function() {
 		cssnano
   ];
   return gulp.src('sass/styles.scss')
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
 	.pipe(postcss(plugins))
     .pipe(gulp.dest('processed-css'))
 	.pipe(browserSync.stream());
