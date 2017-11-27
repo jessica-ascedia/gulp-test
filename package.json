@@ -4,7 +4,7 @@
   "description": "Gulp testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "imagemin-gifsicle": "^5.2.0",
     "imagemin-jpeg-recompress": "^5.1.0",
     "imagemin-optipng": "^5.2.1",
-    "imagemin-svgo": "^5.2.2"
+    "imagemin-svgo": "^5.2.2",
+    "mocha": "^4.0.1"
   },
   "browserslist": [
     "last 2 versions"
